@@ -6,5 +6,5 @@ MOVEMENT_FACTOR = 1
 
 LIGHTGREY = (100, 100, 100)
 RED = (255, 0, 0)
-BLUE = (0, 255, 0)
-GREEN = (0, 0, 255)
+BLUE = (0, 0, 255)
+GREEN = (0, 255, 0)

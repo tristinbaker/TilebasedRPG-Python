@@ -12,7 +12,7 @@ class Player(pygame.sprite.Sprite):
 		self.rect = pygame.Rect(x, y, WIDTH / TILESIZE, WIDTH / TILESIZE)
 
 	def draw(self):
-		pygame.draw.rect(pygame.display.get_surface(), BLUE, self.rect) 
+		pygame.draw.rect(pygame.display.get_surface(), GREEN, self.rect) 
 
 	def move(self, dx, dy):
 		self.dx = dx
@@ -33,6 +33,7 @@ class Player(pygame.sprite.Sprite):
 	def check_collision(self, tx, ty):
 		self.check_boundaries()
 		self.check_walls(tx, ty)
+		self.check_doors()
 
 	def check_boundaries(self):
 		if self.x < 0:
@@ -50,4 +51,9 @@ class Player(pygame.sprite.Sprite):
 			if self.x == walls[i].x and self.y == walls[i].y:
 				self.x = tx
 				self.y = ty
-				
+
+	def check_doors(self):
+		doors = self.game.doors
+		for i in range(len(doors)):
+			if self.x == doors[i].x and self.y == doors[i].y:
+				print(doors[i].exit)

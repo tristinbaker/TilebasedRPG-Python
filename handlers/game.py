@@ -1,5 +1,7 @@
 import pygame
-from wall import Wall
+from entities.wall import Wall
+from handlers.input import InputHandler
+from handlers.map import MapHandler
 from settings import * 
 
 class Game:
@@ -9,6 +11,8 @@ class Game:
 		pygame.display.set_mode([WIDTH, HEIGHT])
 		pygame.display.set_caption("Pygame Tilebased RPG")
 		pygame.key.set_repeat(100)
+		self.input_handler = InputHandler()
+		self.map_handler = MapHandler()
 
 	def draw_grid(self):
 		for x in range(0, WIDTH, TILESIZE):
@@ -20,12 +24,16 @@ class Game:
 	def clear_screen(self):
 		pygame.display.get_surface().fill((0, 0, 0))
 
-	def set_walls(self):
-		self.walls = []
-		for x in range(10, 15):
-			self.walls.append(Wall(x, 10))
+	def set_walls(self, walls):
+		self.walls = walls
 
-	def draw_walls(self):
+	def set_doors(self, doors):
+		self.doors = doors
+
+	def draw_map(self):
 		for x in range(len(self.walls)):
 			self.walls[x].update()
 			self.walls[x].draw()
+		for x in range(len(self.doors)):
+			self.doors[x].update()
+			self.doors[x].draw()
