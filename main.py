@@ -4,15 +4,10 @@ import pygame
 from settings import * 
 from handlers.game import Game
 from entities.player import Player
-from towns.hums import Hums
 
-game = Game()
+game = Game('hums')
 player = Player(game, 5, 8)
 
-walls = Hums().walls
-doors = Hums().doors
-game.set_walls(walls)
-game.set_doors(doors)
 input_handler = game.input_handler
 
 while True:
@@ -24,6 +19,7 @@ while True:
 		input_handler.handle_input(event, player)
 	
 	game.draw_grid()
+	game.update_map()
 	game.draw_map()
 	player.update()
 	player.draw()

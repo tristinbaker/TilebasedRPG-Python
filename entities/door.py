@@ -5,11 +5,10 @@ from settings import *
 
 class Door(Wall):
 
-	def __init__(self, x, y, exit):
+	def __init__(self, x, y, exit, entrance_x, entrance_y):
 		self.x = x
 		self.y = y
+		self.entrance_x = entrance_x
+		self.entrance_y = entrance_y
 		self.rect = pygame.Rect(x, y, WIDTH / TILESIZE, WIDTH / TILESIZE)
 		self.exit = exit
-
-	def draw(self):
-		pygame.draw.rect(pygame.display.get_surface(), BLUE, self.rect)

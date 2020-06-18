@@ -12,5 +12,5 @@ class Wall(pygame.sprite.Sprite):
 		self.rect.x = self.x * TILESIZE
 		self.rect.y = self.y * TILESIZE
 
-	def draw(self):
-		pygame.draw.rect(pygame.display.get_surface(), RED, self.rect)
+	def draw(self, color):
+		pygame.draw.rect(pygame.display.get_surface(), color, self.rect)

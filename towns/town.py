@@ -18,12 +18,12 @@ class Town:
 					wall_array.append(Wall(x, y))
 		return wall_array
 
-	def set_doors(self, walls, doors):
+	def set_doors(self, walls, doors, entrances):
 		door_array = []
 		door = 0
 		for x in range(int(WIDTH / TILESIZE)):
 			for y in range(int(HEIGHT / TILESIZE)):
 				if walls[y][x] == 2:
-					door_array.append(Door(x, y, doors[door]))
+					door_array.append(Door(x, y, doors[door], entrances[door][0], entrances[door][1]))
 					door += 1
 		return door_array

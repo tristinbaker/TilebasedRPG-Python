@@ -14,6 +14,10 @@ class Player(pygame.sprite.Sprite):
 	def draw(self):
 		pygame.draw.rect(pygame.display.get_surface(), GREEN, self.rect) 
 
+	def update_position(self, x, y):
+		self.x = x
+		self.y = y
+
 	def move(self, dx, dy):
 		self.dx = dx
 		self.dy = dy
@@ -22,11 +26,8 @@ class Player(pygame.sprite.Sprite):
 		temp_y = self.y
 		self.y += self.dy
 		self.check_collision(temp_x, temp_y)
-		
 
 	def update(self):
-		#print("x: " + str(self.rect.x))
-		#print("y: " + str(self.rect.y))
 		self.rect.x = self.x * TILESIZE
 		self.rect.y = self.y * TILESIZE	
 
@@ -56,4 +57,5 @@ class Player(pygame.sprite.Sprite):
 		doors = self.game.doors
 		for i in range(len(doors)):
 			if self.x == doors[i].x and self.y == doors[i].y:
-				print(doors[i].exit)
+				self.game.map_handler.change_map(doors[i].exit)
+				self.update_position(doors[i].entrance_x, doors[i].entrance_y)

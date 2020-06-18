@@ -6,13 +6,15 @@ from settings import *
 
 class Game:
 
-	def __init__(self):
+	def __init__(self, map):
 		pygame.init()
 		pygame.display.set_mode([WIDTH, HEIGHT])
 		pygame.display.set_caption("Pygame Tilebased RPG")
 		pygame.key.set_repeat(100)
 		self.input_handler = InputHandler()
-		self.map_handler = MapHandler()
+		self.map_handler = MapHandler(map)
+		self.set_walls(self.map_handler.map.walls)
+		self.set_doors(self.map_handler.map.doors)
 
 	def draw_grid(self):
 		for x in range(0, WIDTH, TILESIZE):
@@ -30,10 +32,14 @@ class Game:
 	def set_doors(self, doors):
 		self.doors = doors
 
+	def update_map(self):
+		self.set_walls(self.map_handler.map.walls)
+		self.set_doors(self.map_handler.map.doors)
+
 	def draw_map(self):
 		for x in range(len(self.walls)):
 			self.walls[x].update()
-			self.walls[x].draw()
+			self.walls[x].draw(RED)
 		for x in range(len(self.doors)):
 			self.doors[x].update()
-			self.doors[x].draw()
+			self.doors[x].draw(BLUE)
