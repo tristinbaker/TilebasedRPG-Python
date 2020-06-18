@@ -10,4 +10,6 @@ I am trying to best practices with Python as well as game development in mind wh
 
 * Implement player inventory
 
-* Finish map swapping logic
+* Implement battle system
+
+  * Enemies
