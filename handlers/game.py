@@ -1,5 +1,4 @@
 import pygame
-from entities.wall import Wall
 from handlers.input import InputHandler
 from handlers.map import MapHandler
 from settings import * 
@@ -13,8 +12,9 @@ class Game:
 		pygame.key.set_repeat(100)
 		self.input_handler = InputHandler()
 		self.map_handler = MapHandler(map)
-		self.set_walls(self.map_handler.map.walls)
-		self.set_doors(self.map_handler.map.doors)
+		self.walls = self.map_handler.map.walls
+		self.doors = self.map_handler.map.doors
+		self.npcs = self.map_handler.map.npcs
 
 	def draw_grid(self):
 		for x in range(0, WIDTH, TILESIZE):
@@ -32,9 +32,13 @@ class Game:
 	def set_doors(self, doors):
 		self.doors = doors
 
+	def set_npcs(self, npcs):
+		self.npcs = npcs
+
 	def update_map(self):
 		self.set_walls(self.map_handler.map.walls)
 		self.set_doors(self.map_handler.map.doors)
+		self.set_npcs(self.map_handler.map.npcs)
 
 	def draw_map(self):
 		for x in range(len(self.walls)):
@@ -43,3 +47,6 @@ class Game:
 		for x in range(len(self.doors)):
 			self.doors[x].update()
 			self.doors[x].draw(BLUE)
+		for x in range(len(self.npcs)):
+			self.npcs[x].update()
+			self.npcs[x].draw()

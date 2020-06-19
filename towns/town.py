@@ -1,5 +1,6 @@
 from entities.wall import Wall
 from entities.door import Door
+from entities.npc import NPC
 from settings import *
 
 class Town:
@@ -8,7 +9,7 @@ class Town:
 		self.map = 0
 		self.walls = set_walls(self.map)
 		self.doors = set_doors(self.map)
-		pass
+		self.npcs = set_npcs(self.map)
 
 	def set_walls(self, walls):
 		wall_array = []
@@ -27,3 +28,10 @@ class Town:
 					door_array.append(Door(x, y, doors[door], entrances[door][0], entrances[door][1]))
 					door += 1
 		return door_array
+
+	def set_npcs(self, npcs):
+		npc_array = []
+		for x, y in npcs.items():
+			npc_array.append(NPC(y[0], y[1], y[2], x))
+		return npc_array
+		

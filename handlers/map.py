@@ -6,7 +6,6 @@ class MapHandler:
 		self.map_list = self.set_map_list()
 		self.map = self.map_list[map]
 
-
 	def change_map(self, map):
 		self.map = self.map_list[map]
 

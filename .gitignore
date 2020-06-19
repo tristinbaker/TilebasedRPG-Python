@@ -1,5 +1,5 @@
 /__pycache__/
-/towns/__pycache__/
-/entities/__pycache__/
-/handlers/__pycache__/
-/maps/__pycache__/
+/towns/__pycache__/*
+/entities/__pycache__/*
+/handlers/__pycache__/*
+/maps/__pycache__/*

@@ -1,22 +1,21 @@
-import pygame
+from entities.entity import Entity
 from settings import *
 
-class Player(pygame.sprite.Sprite):
+import pygame
+
+class Player(Entity):
 	
-	def __init__(self, game, x, y):
+	def __init__(self, game, x, y, direction):
+		self.game = game
 		self.x = x
 		self.y = y
-		self.game = game
 		self.dx = 0
 		self.dy = 0
+		self.direction = NORTH
 		self.rect = pygame.Rect(x, y, WIDTH / TILESIZE, WIDTH / TILESIZE)
 
 	def draw(self):
 		pygame.draw.rect(pygame.display.get_surface(), GREEN, self.rect) 
-
-	def update_position(self, x, y):
-		self.x = x
-		self.y = y
 
 	def move(self, dx, dy):
 		self.dx = dx
@@ -27,14 +26,11 @@ class Player(pygame.sprite.Sprite):
 		self.y += self.dy
 		self.check_collision(temp_x, temp_y)
 
-	def update(self):
-		self.rect.x = self.x * TILESIZE
-		self.rect.y = self.y * TILESIZE	
-
 	def check_collision(self, tx, ty):
 		self.check_boundaries()
 		self.check_walls(tx, ty)
 		self.check_doors()
+		self.check_npcs(tx, ty)
 
 	def check_boundaries(self):
 		if self.x < 0:
@@ -59,3 +55,27 @@ class Player(pygame.sprite.Sprite):
 			if self.x == doors[i].x and self.y == doors[i].y:
 				self.game.map_handler.change_map(doors[i].exit)
 				self.update_position(doors[i].entrance_x, doors[i].entrance_y)
+
+	def check_npcs(self, tx, ty):
+		npcs = self.game.npcs
+		for i in range(len(npcs)):
+			if self.x == npcs[i].x and self.y == npcs[i].y:
+				self.x = tx 
+				self.y = ty 
+
+	def check_dialog(self):
+		npcs = self.game.npcs
+		for i in range(len(npcs)):
+			if self.direction == NORTH:
+				if self.x == npcs[i].x and self.y - 1 == npcs[i].y:
+					print(npcs[i].text)
+			elif self.direction == WEST: 
+				if self.x - 1 == npcs[i].x and self.y == npcs[i].y:
+					print(npcs[i].text)
+			elif self.direction == SOUTH:
+				if self.x == npcs[i].x and self.y + 1 == npcs[i].y:
+					print(npcs[i].text)
+			elif self.direction == EAST:
+				if self.x + 1 == npcs[i].x and self.y == npcs[i].y:
+					print(npcs[i].text)
+

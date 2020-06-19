@@ -9,15 +9,22 @@ class InputHandler:
 	def handle_input(self, event, player):
 		dx = 0
 		dy = 0
+		direction = player.direction 
 		if event.type == pygame.KEYDOWN:
 			if event.key==pygame.K_w:
+				direction = NORTH
 				dy = -MOVEMENT_FACTOR
 			if event.key==pygame.K_s:
+				direction = SOUTH
 				dy = MOVEMENT_FACTOR
 			if event.key==pygame.K_a:
+				direction = WEST
 				dx = -MOVEMENT_FACTOR
 			if event.key==pygame.K_d:
+				direction = EAST
 				dx = MOVEMENT_FACTOR
+			if event.key==pygame.K_SPACE:
+				player.check_dialog()
 		if event.type == pygame.KEYUP:
 			if event.key==pygame.K_w:
 				dy = 0
@@ -27,4 +34,7 @@ class InputHandler:
 				dx = 0
 			if event.key==pygame.K_d:
 				dx = 0
+			if event.key==pygame.K_SPACE:
+				pass
+		player.update_direction(direction)
 		player.move(dx, dy)
