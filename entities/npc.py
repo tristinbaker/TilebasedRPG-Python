@@ -1,5 +1,4 @@
 import pygame
-from handlers.dialog import DialogHandler
 from entities.entity import Entity
 from settings import *
 
@@ -16,4 +15,3 @@ class NPC(Entity):
 
 	def draw(self):
 		pygame.draw.rect(pygame.display.get_surface(), WHITE, self.rect) 
-	

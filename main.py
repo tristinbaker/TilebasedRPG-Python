@@ -4,7 +4,6 @@ import pygame
 from settings import * 
 from handlers.game import Game
 from entities.player import Player
-from handlers.dialog import DialogHandler
 
 game = Game('hums')
 player = Player(game, 18, 18, NORTH)

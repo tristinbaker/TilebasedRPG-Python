@@ -1,4 +1,5 @@
 from entities.entity import Entity
+from entities.inventory import Inventory
 from settings import *
 
 import pygame
@@ -13,6 +14,7 @@ class Player(Entity):
 		self.dy = 0
 		self.direction = NORTH
 		self.rect = pygame.Rect(x, y, WIDTH / TILESIZE, WIDTH / TILESIZE)
+		self.inventory = Inventory({"Sword": 1, "Shield": 1})
 
 	def draw(self):
 		pygame.draw.rect(pygame.display.get_surface(), GREEN, self.rect) 
@@ -25,6 +27,10 @@ class Player(Entity):
 		temp_y = self.y
 		self.y += self.dy
 		self.check_collision(temp_x, temp_y)
+
+	def show_inventory(self):
+		for item, count in self.inventory.items.items():
+			print(item + ' ' + str(count))
 
 	def check_collision(self, tx, ty):
 		self.check_boundaries()

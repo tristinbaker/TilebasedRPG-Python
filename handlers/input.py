@@ -25,6 +25,8 @@ class InputHandler:
 				dx = MOVEMENT_FACTOR
 			if event.key==pygame.K_SPACE:
 				player.check_dialog()
+			if event.key==pygame.K_i:
+				player.show_inventory()
 		if event.type == pygame.KEYUP:
 			if event.key==pygame.K_w:
 				dy = 0
@@ -35,6 +37,8 @@ class InputHandler:
 			if event.key==pygame.K_d:
 				dx = 0
 			if event.key==pygame.K_SPACE:
+				pass
+			if event.key==pygame.K_i:
 				pass
 		player.update_direction(direction)
 		player.move(dx, dy)
