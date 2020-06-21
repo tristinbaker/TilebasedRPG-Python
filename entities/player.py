@@ -18,9 +18,7 @@ class Player(Entity):
 		self.direction = NORTH
 		self.rect = pygame.Rect(x, y, WIDTH / TILESIZE, WIDTH / TILESIZE)
 		self.inventory = Inventory({"Sword": 1, "Shield": 1})
-
-	def draw(self):
-		pygame.draw.rect(pygame.display.get_surface(), GREEN, self.rect) 
+		self.image = pygame.image.load('res/sprites/player/player-south.png')
 
 	def move(self, dx, dy):
 		self.dx = dx
@@ -34,6 +32,16 @@ class Player(Entity):
 	def show_inventory(self):
 		for item, count in self.inventory.items.items():
 			print(item + ' ' + str(count))
+
+	def update_sprite(self):
+		if self.direction == SOUTH:
+			self.image = pygame.image.load('res/sprites/player/player-south.png')
+		elif self.direction == NORTH:
+			self.image = pygame.image.load('res/sprites/player/player-north.png')
+		elif self.direction == WEST:
+			self.image = pygame.image.load('res/sprites/player/player-west.png')
+		elif self.direction == EAST:
+			self.image = pygame.image.load('res/sprites/player/player-east.png')
 
 	def check_collision(self, tx, ty):
 		self.check_boundaries()

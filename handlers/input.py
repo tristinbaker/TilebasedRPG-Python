@@ -41,4 +41,5 @@ class InputHandler:
 			if event.key==pygame.K_i:
 				pass
 		player.update_direction(direction)
+		player.update_sprite()
 		player.move(dx, dy)
