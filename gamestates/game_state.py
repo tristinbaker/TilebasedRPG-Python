@@ -1,15 +1,17 @@
+from settings import *
 from entities.wall import Wall
 from entities.door import Door
-from entities.npc import NPC
-from settings import *
+from entities.npc  import NPC
 
-class Town:
+class GameState():
 
-	def __init__(self):
-		self.map = 0
-		self.walls = set_walls(self.map)
-		self.doors = set_doors(self.map)
-		self.npcs = set_npcs(self.map)
+	def __init__(self, gsm):
+		self.gsm = gsm 
+
+	def initialize_state(self, walls, doors, entrances, npcs):
+		self.walls = self.set_walls(walls)
+		self.doors = self.set_doors(walls, doors, entrances)
+		self.npcs  = self.set_npcs(npcs)
 
 	def set_walls(self, walls):
 		wall_array = []
@@ -31,7 +33,7 @@ class Town:
 
 	def set_npcs(self, npcs):
 		npc_array = []
-		for x, y in npcs.items():
-			npc_array.append(NPC(y[0], y[1], y[2], x))
+		for npc, stats in npcs.items():
+			npc_array.append(NPC(self.gsm, npc, stats["x"], stats["y"], stats["direction"], stats["hail_range"]))
 		return npc_array
 		

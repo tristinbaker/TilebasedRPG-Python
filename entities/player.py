@@ -6,8 +6,11 @@ import pygame
 
 class Player(Entity):
 	
-	def __init__(self, game, x, y, direction):
-		self.game = game
+	def __init__(self, gsm, x, y, hp, strength, defense):
+		self.gsm = gsm
+		self.hp = 100
+		self.strength = strength 
+		self.defense = defense 
 		self.x = x
 		self.y = y
 		self.dx = 0
@@ -49,28 +52,28 @@ class Player(Entity):
 			self.y = (HEIGHT - TILESIZE) / TILESIZE
 
 	def check_walls(self, tx, ty):
-		walls = self.game.walls
+		walls = self.gsm.states[self.gsm.current_state].walls
 		for i in range(len(walls)):
 			if self.x == walls[i].x and self.y == walls[i].y:
 				self.x = tx
 				self.y = ty
 
 	def check_doors(self):
-		doors = self.game.doors
+		doors = self.gsm.states[self.gsm.current_state].doors
 		for i in range(len(doors)):
 			if self.x == doors[i].x and self.y == doors[i].y:
-				self.game.map_handler.change_map(doors[i].exit)
+				self.gsm.change_state(doors[i].exit)
 				self.update_position(doors[i].entrance_x, doors[i].entrance_y)
 
 	def check_npcs(self, tx, ty):
-		npcs = self.game.npcs
+		npcs = self.gsm.states[self.gsm.current_state].npcs
 		for i in range(len(npcs)):
 			if self.x == npcs[i].x and self.y == npcs[i].y:
 				self.x = tx 
 				self.y = ty 
 
 	def check_dialog(self):
-		npcs = self.game.npcs
+		npcs = self.gsm.states[self.gsm.current_state].npcs
 		for i in range(len(npcs)):
 			if self.direction == NORTH:
 				if self.x == npcs[i].x and self.y - 1 == npcs[i].y:

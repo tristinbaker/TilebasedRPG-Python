@@ -2,26 +2,18 @@ import sys
 
 import pygame
 from settings import * 
-from handlers.game import Game
-from entities.player import Player
+from gamestates.game_state_manager import GameStateManager 
 
-game = Game('hums')
-player = Player(game, 18, 18, NORTH)
-
-input_handler = game.input_handler
+gsm = GameStateManager()
 
 while True:
-	game.clear_screen()
+	gsm.clear_screen()
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			pygame.quit()
 			sys.exit()
-		input_handler.handle_input(event, player)
+		gsm.input_handler.handle_input(event, gsm.player)
 	
-	game.draw_grid()
-	game.update_map()
-	game.draw_map()
-	player.update()
-	player.draw()
+	gsm.update()
 
 	pygame.display.flip()
