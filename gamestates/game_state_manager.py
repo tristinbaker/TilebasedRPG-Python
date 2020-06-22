@@ -58,14 +58,11 @@ class GameStateManager():
 		for x in range(len(self.walls)):
 			self.walls[x].update()
 			self.walls[x].draw(RED)
-			#self.walls[x].draw(RED, self.camera.apply(self.walls[x]))
 		for x in range(len(self.doors)):
 			self.doors[x].update()
-			#self.doors[x].draw(BLUE, self.camera.apply(self.doors[x]))
 			self.doors[x].draw(BLUE)
 		for x in range(len(self.npcs)):
 			self.npcs[x].update()
-			#self.npcs[x].draw(self.camera.apply(self.npcs[x]))
 			self.npcs[x].draw()
 
 	def clear_screen(self):

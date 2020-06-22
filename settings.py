@@ -1,5 +1,7 @@
 WIDTH  = 1024
 HEIGHT = 768
+w = 'w'
+d = 'd'
 
 TILESIZE = 32
 MOVEMENT_FACTOR = 1

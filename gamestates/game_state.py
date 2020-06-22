@@ -17,7 +17,7 @@ class GameState():
 		wall_array = []
 		for x in range(int(WIDTH / TILESIZE)):
 			for y in range(int(HEIGHT / TILESIZE)):
-				if walls[y][x] == 1:
+				if walls[y][x] == w:
 					wall_array.append(Wall(self.gsm, x, y))
 		return wall_array
 
@@ -26,7 +26,7 @@ class GameState():
 		door = 0
 		for x in range(int(WIDTH / TILESIZE)):
 			for y in range(int(HEIGHT / TILESIZE)):
-				if walls[y][x] == 2:
+				if walls[y][x] == d:
 					door_array.append(Door(self.gsm, x, y, doors[door], entrances[door][0], entrances[door][1]))
 					door += 1
 		return door_array
